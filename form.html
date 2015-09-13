@@ -1,6 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
 
-<form method="post" action="user">
-    <input name="first_name" placeholder="first_name">
-    <input name="last_name" placeholder="last_name">
-    <input type="submit">
-</form>
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+</head>
+
+<body>
+
+    <form action="user" method="post" id="user-form">
+    	<input name="first_name" value="" id="first-name"/>
+    	<input name="last_name" id="last-name"/>
+    	<button type="submit"> register </button>
+    </form>
+    <h3 id="full-name"></h3>
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/riot/2.2.4/riot.min.js"></script>
+  	<script src="javascript/built/out.js"></script>
+
+  	<script type="text/javascript">
+  		new UserRegistration.Presenter(new UserRegistration.View(), new UserRegistration.Model());
+  	</script>
+</body>
+
+</html>
