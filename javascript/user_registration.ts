@@ -48,15 +48,17 @@ module UserRegistration {
 	
 	export class Presenter {
 		constructor(private view: SerializeUserInformation, private model: RegisterUser){
-			view.whenUserRegister(this.saveUserCallback);
+			view.whenUserRegister(this.saveUserCallback());
 			model.whenUserIsSaved(this.showWelcomeMessage);
 		}
 
-		saveUserCallback(userData: JSON){
+		saveUserCallback() {
 			//call the model the same way
-			console.log(this);
-			this.model.saveUser(userData);
-			console.log("data is transferred");
+			return (userData: JSON) => {
+				console.log(this);
+				this.model.saveUser(userData);
+				console.log("data is transferred");
+			}
 		}
 
 		showWelcomeMessage(){

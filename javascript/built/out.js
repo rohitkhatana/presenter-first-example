@@ -31,17 +31,17 @@ var UserRegistration;
         function Presenter(view, model) {
             this.view = view;
             this.model = model;
-            view.whenUserRegister(this.saveUserCallback);
+            view.whenUserRegister(this.saveUserCallback());
             model.whenUserIsSaved(this.showWelcomeMessage);
         }
-        Presenter.prototype.self = function () {
-            return this;
-        };
-        Presenter.prototype.saveUserCallback = function (userData) {
+        Presenter.prototype.saveUserCallback = function () {
+            var _this = this;
             //call the model the same way
-            console.log(this);
-            this.self().model.saveUser(userData);
-            console.log("data is transferred");
+            return function (userData) {
+                console.log(_this);
+                _this.model.saveUser(userData);
+                console.log("data is transferred");
+            };
         };
         Presenter.prototype.showWelcomeMessage = function () {
             this.view.showWelcomeMessage();
