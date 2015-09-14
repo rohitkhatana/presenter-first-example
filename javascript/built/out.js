@@ -32,7 +32,7 @@ var UserRegistration;
             this.view = view;
             this.model = model;
             view.whenUserRegister(this.saveUserCallback());
-            model.whenUserIsSaved(this.showWelcomeMessage);
+            model.whenUserIsSaved(this.showWelcomeMessage());
         }
         Presenter.prototype.saveUserCallback = function () {
             var _this = this;
@@ -44,7 +44,11 @@ var UserRegistration;
             };
         };
         Presenter.prototype.showWelcomeMessage = function () {
-            this.view.showWelcomeMessage();
+            var _this = this;
+            return function () {
+                console.log("hey i am called");
+                _this.view.showWelcomeMessage();
+            };
             //call view to render welcome message;
         };
         return Presenter;
@@ -62,6 +66,9 @@ var UserRegistration;
                 data: JSON.stringify(userData),
                 success: function (data) {
                     _this.announcer.trigger("whenUserIsSaved");
+                },
+                error: function (err) {
+                    console.log("error");
                 },
                 contentType: "application/json",
                 dataType: 'json'

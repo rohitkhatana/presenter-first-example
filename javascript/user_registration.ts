@@ -49,7 +49,7 @@ module UserRegistration {
 	export class Presenter {
 		constructor(private view: SerializeUserInformation, private model: RegisterUser){
 			view.whenUserRegister(this.saveUserCallback());
-			model.whenUserIsSaved(this.showWelcomeMessage);
+			model.whenUserIsSaved(this.showWelcomeMessage());
 		}
 
 		saveUserCallback() {
@@ -62,7 +62,10 @@ module UserRegistration {
 		}
 
 		showWelcomeMessage(){
-			this.view.showWelcomeMessage();
+			return () => {
+				console.log("hey i am called");
+				this.view.showWelcomeMessage();
+			}
 			//call view to render welcome message;
 		}
 	} 
@@ -83,6 +86,9 @@ module UserRegistration {
 				data: JSON.stringify(userData),
 				success: function(data) {
 					_this.announcer.trigger("whenUserIsSaved");
+				},
+				error: function(err){
+					console.log("error");
 				},
 				contentType: "application/json",
 				dataType: 'json'
